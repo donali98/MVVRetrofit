@@ -29,10 +29,10 @@ class MainActivity : AppCompatActivity() {
             layoutManager=LinearLayoutManager(this@MainActivity)
         }
         viewModel.getAll().observe(this, Observer {
-            adapter.updateList(it)
+//            if(it.isEmpty())
         })
         btn_repo.setOnClickListener {
-            viewModel.retrieveRepo(et_repo.text.toString())
+//            viewModel.retreiveRepos(et_repo.text.toString())
         }
     }
 
