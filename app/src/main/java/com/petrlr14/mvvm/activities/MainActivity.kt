@@ -1,6 +1,8 @@
 package com.petrlr14.mvvm.activities
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -28,12 +30,22 @@ class MainActivity : AppCompatActivity() {
             adapter=this@MainActivity.adapter
             layoutManager=LinearLayoutManager(this@MainActivity)
         }
-        viewModel.getAll().observe(this, Observer {
-//            if(it.isEmpty())
-        })
-        btn_repo.setOnClickListener {
-//            viewModel.retreiveRepos(et_repo.text.toString())
+        btn_repo.setOnClickListener{
+            viewModel.retreiveRepos(et_repo.text.toString())
+            viewModel.getAll().observe(this, Observer { it1 ->
+                /*it1.forEach {
+                    Log.d("CUSTOM",it.name)
+                }*/
+                adapter.updateList(it1)
+            })
+            /*viewModel.getAll(et_repo.text.toString()).observe(this, Observer {
+                if(it.isEmpty())
+                    Toast.makeText(this,"no data found",Toast.LENGTH_SHORT).show()
+            })*/
         }
+//        btn_repo.setOnClickListener {
+//            viewModel.(et_repo.text.toString())
+//        }
     }
 
 }

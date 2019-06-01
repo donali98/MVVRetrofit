@@ -1,5 +1,6 @@
 package com.petrlr14.mvvm.database.repositories
 
+import android.util.Log
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
 import com.petrlr14.mvvm.database.daos.GitHubDAO
@@ -11,7 +12,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class GitHubRepoRepository (private val repoDao:GitHubDAO) {
+class GitHubRepoRepository(private val repoDao: GitHubDAO) {
 
 
 /*    fun retreiveReposAsync(user:String): Deferred<Response<List<GitHubRepo>>> =
@@ -32,14 +33,18 @@ class GitHubRepoRepository (private val repoDao:GitHubDAO) {
         return repoDao.nukeTable()
     }
 
-    fun retreiveRepos(user: String) = GlobalScope.launch(Dispatchers.IO) {
-        this@GitHubRepoRepository.nuke()
-        val response = GithubService.getGithubServices().getAllReposPerUser(user).await()
-        if (response.isSuccessful) with(response) {
-            this.body()?.forEach {
-                this@GitHubRepoRepository.insert(it)
+    fun retreiveRepos(user: String) =
+        GlobalScope.launch(Dispatchers.IO) {
+            this@GitHubRepoRepository.nuke()
+            val response = GithubService.getGithubServices().getAllReposPerUser(user).await()
+            if (response.isSuccessful) with(response) {
+                this.body()?.forEach {
+//                    Log.d("CUSTOM", it.name)
+                    this@GitHubRepoRepository.insert(it)
+                }
             }
+
+
         }
-    }
 }
 

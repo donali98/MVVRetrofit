@@ -22,9 +22,9 @@ class GitHubRepoViewModel(private val app: Application) : AndroidViewModel(app) 
 
     private suspend fun insert(repo:GitHubRepo)=repository.insert(repo)
 
-    fun getAll():LiveData<List<GitHubRepo>>{
-        return repository.getAll()
-    }
+    fun getAll():LiveData<List<GitHubRepo>> =  repository.getAll()
+
+    fun retreiveRepos(user:String) = repository.retreiveRepos(user)
 
     private suspend fun nuke()= repository.nuke()
 

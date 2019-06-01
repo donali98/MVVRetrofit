@@ -8,7 +8,7 @@ import com.petrlr14.mvvm.database.daos.GitHubDAO
 import com.petrlr14.mvvm.database.entities.GitHubRepo
 
 @Database(entities = [GitHubRepo::class], version = 1, exportSchema = false)
-public abstract class RoomDB : RoomDatabase() {
+abstract class RoomDB : RoomDatabase() {
 
     abstract fun repoDao():GitHubDAO
 
